@@ -1,0 +1,20 @@
+---
+- name: Stop app
+  shell: su downlink -c "./stop.sh"
+  args:
+    chdir: "{{ installdir }}"
+
+- name: Remove rsyslog config
+  file: path=/etc/rsyslog.d/40-{{ appname }}.conf state=absent
+  notify:
+    - restart rsyslog
+
+- name: Remove logrotate config
+  file: path=/etc/logrotate.d/{{ appname }} state=absent
+
+- name: Remove symlink
+  file: path={{ installdir }} state=absent
+
+- name: Remove extraction dir
+  file: path={{ extractdir }} state=absent
+

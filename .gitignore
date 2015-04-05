@@ -1,0 +1,6 @@
+.*.swp
+*.log
+*.tbz2
+node_modules
+ontario
+build
