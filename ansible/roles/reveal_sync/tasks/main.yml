@@ -26,3 +26,12 @@
   shell: su downlink -c "./stop.sh; ./start.sh"
   args:
     chdir: "{{ installdir }}"
+
+- name: Check static dir exists
+  file: path=/opt/static state=directory owner=downlink group=www-data mode=0755
+
+- name: Copy static JS files
+  copy: src=../dist/{{ item }} dest=/opt/static/js/{{ item }} owner=downlink group=www-data mode=0644
+  with_items:
+    - "reveal-sync.js"
+    - "socket.io.js"
