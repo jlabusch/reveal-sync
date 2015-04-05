@@ -3,7 +3,7 @@
 ### tl;dr
 
 One person loads a Reveal.js presentation, creates a unique stream ID and
-shares a link to the other participants. The participants load the presentation using
+shares a link with the other participants. The participants load the presentation using
 the unique ID and are automatically subscribed to "navigation" events from the presenter &mdash;
 next slide, prev slide, next fragment, etc.
 
