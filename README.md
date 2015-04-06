@@ -11,12 +11,15 @@ next slide, prev slide, next fragment, etc.
 
 Not too long ago I gave a presentation on
 <a href="http://jlabusch.github.io/distributed-teams">working with distributed teams</a>.
-Ironically, some members of the audience were joining remotely and for various tragic
+Ironically, some members of the audience were joining remotely and for various boring
 reasons we couldn't share the slides over a video conferencing link. I shared a link
 to the hosted slides so they could follow along, but keeping everyone on the same page
 was an annoying distraction.
 
-The next day I wrote `reveal-sync`.
+And so `reveal-sync` was born. "But surely," you say, "this must be a solved problem! Why re-invent
+the wheel?!"
+
+Well, sometimes you just need your own wheel.
 
 `reveal-sync` is
 
