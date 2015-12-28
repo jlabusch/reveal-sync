@@ -31,7 +31,9 @@ Well, sometimes you just need your own wheel.
 `reveal-sync` does require that the presentation be hosted in a place that all
 participants have access to, e.g. <a href="http://github.io">GitHub.io</a>.
 
-### How to use the free hosted service
+### How to use the free hosted service (Temporarily unavailable)
+
+<b>Note: Service down over new year, back in January.</b>
 
 Include the following in your presentation:
 
