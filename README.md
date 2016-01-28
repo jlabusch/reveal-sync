@@ -33,8 +33,6 @@ participants have access to, e.g. <a href="http://github.io">GitHub.io</a>.
 
 ### How to use the free hosted service
 
-<b>Note: Service down over new year, back in January.</b>
-
 Include the following in your presentation:
 
 ```diff
