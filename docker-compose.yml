@@ -1,0 +1,31 @@
+version: "2"
+services:
+    lb:
+        image: dockercloud/haproxy:1.2.1
+        links:
+            - static
+            - app
+        ports:
+            - "8010:80"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+    static:
+        image: downlink/reveal-sync-static
+        restart: always
+        build:
+            context: .
+            dockerfile: dockerfile-static
+        expose:
+            - "80"
+        environment:
+            VIRTUAL_HOST: "downlink.nz"
+    app:
+        image: downlink/reveal-sync-app
+        restart: always
+        build:
+            context: .
+            dockerfile: dockerfile-node
+        expose:
+            - "9000"
+        environment:
+            VIRTUAL_HOST: "sync.downlink.nz"

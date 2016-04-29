@@ -1,10 +1,11 @@
 {
-    "daemon": true,
+    "daemon": false,
+    "cluster": false,
     "port": 9000,
     "workers": 1,
     "pid_dir": "/tmp",
     "log": {
-        "facility": "local4",
-        "level": "info"
+        "facility": "stdout",
+        "level": "debug"
     }
 }

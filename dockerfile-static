@@ -1,0 +1,6 @@
+FROM nginx:alpine
+
+COPY dist/reveal-sync.js /usr/share/nginx/html/js/
+COPY dist/socket.io.min.1-4-5.js /usr/share/nginx/html/js/socket.io.js
+
+CMD ["nginx", "-g", "daemon off;"]

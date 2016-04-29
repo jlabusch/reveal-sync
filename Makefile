@@ -1,37 +1,24 @@
-include *.mk
+DOCKER=docker
+COMPOSE=docker-compose
+IMAGES=downlink/reveal-sync-app downlink/reveal-sync-static
 
-.PHONY: all deploy-staging remove-staging deploy-prod remove-prod install run clean
+.PHONY: all images dist run clean
 
-all: $(GROUP_VARS) $(PACKAGE)
-	@echo $(PACKAGE)
+all: images dist
 
-deploy-staging: $(GROUP_VARS) $(PACKAGE)
-	cd ansible; ansible-playbook -i ./staging -K ./deploy.yml
+images:
+	$(COMPOSE) build static app
 
-remove-staging: $(GROUP_VARS)
-	cd ansible; ansible-playbook -i ./staging -K ./remove.yml
+dist:
+	for i in $(IMAGES); do $(DOCKER) save -o $$(basename $$i).tar $$i; done
+	tar -jcvf reveal-sync_$$(date +%Y-%m-%d).tbz2 reveal-sync*.tar
+	rm -v reveal-sync*.tar
+	@echo "*** Now copy reveal-sync*.tar.gz to your server."
 
-deploy-prod: $(GROUP_VARS) $(PACKAGE)
-	cd ansible; ansible-playbook -i ./production -K ./deploy.yml
-
-remove-prod: $(GROUP_VARS)
-	cd ansible; ansible-playbook -i ./production -K ./remove.yml
-
-$(GROUP_VARS): $(GROUP_VARS).pgp package.json
-	gpg -o $@ -d $<
-	@grep appname $(GROUP_VARS) || echo "appname: "$(NAME) >> $(GROUP_VARS)
-	@grep version $(GROUP_VARS) || echo "version: "$(VERSION) >> $(GROUP_VARS)
-	@grep extractdir $(GROUP_VARS) || echo "extractdir: /opt/"$(NAME)-$(VERSION) >> $(GROUP_VARS)
-	@grep installdir $(GROUP_VARS) || echo "installdir: /opt/"$(NAME) >> $(GROUP_VARS)
-
-$(PACKAGE): package.json $(NODE_SOURCES)
-	npm install
-	test -f bower.json && ./node_modules/.bin/bower install || :
-	mkdir -p build
-	rsync -avz --include-from build-include . build/
-	mkdir -p $$(dirname $@)
-	cd build && tar -jcvf ../$@ *
+run:
+	$(COMPOSE) up -d
+	$(COMPOSE) logs
 
 clean:
-	rm -fr node_modules build $(PACKAGE) $(GROUP_VARS)
+	$(DOCKER) rmi $$($(DOCKER) images --filter dangling=true -q) $(IMAGES) || :
 

@@ -1,0 +1,12 @@
+FROM node:4.3.0
+
+COPY index.js LICENSE package.json /opt/reveal-sync/
+COPY config/ /opt/reveal-sync/config/
+COPY lib/ /opt/reveal-sync/lib/
+
+RUN cd /opt/reveal-sync && npm install
+
+WORKDIR /opt/reveal-sync
+
+CMD ["node", "./index.js"]
+

@@ -1,7 +1,0 @@
----
-- hosts: ontario
-  remote_user: jacques
-  sudo: yes
-  gather_facts: yes
-  roles:
-    - clean

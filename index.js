@@ -16,7 +16,7 @@ if (config.get('daemon')){
 var cluster = require('cluster'),
     log     = require('./lib/logging');
 
-if (cluster.isMaster){
+if (config.get('cluster') && cluster.isMaster){
     require('./lib/pidfile').write();
 
     function spawn_child(){
