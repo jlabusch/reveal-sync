@@ -31,26 +31,6 @@ Well, sometimes you just need your own wheel.
 `reveal-sync` does require that the presentation be hosted in a place that all
 participants have access to, e.g. <a href="http://github.io">GitHub.io</a>.
 
-### How to use the free hosted service
-
-Include the following in your presentation:
-
-```diff
-  <script src="lib/js/head.min.js"></script>
-  <script src="js/reveal.js"></script>
-+ <script src="http://downlink.nz/js/socket.io.js"></script>
-+ <script src="http://downlink.nz/js/reveal-sync.js"></script>
-
-  <script>
-```
-
-That's it! Next time you refresh your presentation you'll get a prompt with a copy-able link
-like this
-
-> http://example.com/presentation/?sync=8041e93e-0df8-4fe4-8d7d-eab26adeadfa
-
-Share that with your team and they'll be automatically subscribed to your Reveal.js navigation events.
-
 ### Hosting your own service
 
 Take a look at the `ansible` playbook in the repository. If you're using Nginx, Varnish or similar,
